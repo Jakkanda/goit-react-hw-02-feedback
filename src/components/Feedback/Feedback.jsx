@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FeedbackOptions } from '../FeedbackOptions/FeedbackOptions';
 
 export class Feedback extends Component {
   state = {
@@ -12,32 +13,28 @@ export class Feedback extends Component {
     this.setState(prevState => ({
       [chooseButton]: prevState[chooseButton] + 1,
     }));
-
-    countTotalFeedback = () => {
-      let total = 0;
-      for (let feedback of Object.values(this.state)) {
-        total += feedback;
-      }
-      return total;
-    };
-
-    countPositiveFeedbackPercentage = () => {
-      return (this.state.good / this.countTotalFeedback()) * 100;
-    };
   };
+
+  countTotalFeedback = () => {
+    let total = 0;
+    for (let feedback of Object.values(this.state)) {
+      total += feedback;
+    }
+    return total;
+  };
+
+  countPositiveFeedbackPercentage = () => {
+    return ((this.state.good / this.countTotalFeedback()) * 100).toFixed(0);
+  };
+
   render() {
     return (
       <div className="Feedback">
         <h2>Please leave feedback</h2>
-        <button type="button" onClick={this.handlerClick}>
-          Good
-        </button>
-        <button type="button" onClick={this.handlerClick}>
-          Neutral
-        </button>
-        <button type="button" onClick={this.handlerClick}>
-          Bad
-        </button>
+        <FeedbackOptions
+          options={['Good', 'Neutral', 'Bad']}
+          onLeaveFeedBack={this.handlerClick}
+        />
         <h2>Statistics</h2>
         <ul>
           <li>Good: {this.state.good}</li>
