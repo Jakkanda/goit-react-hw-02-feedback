@@ -19,20 +19,6 @@ class App extends Component {
     }));
   };
 
-  
-
-  // countTotalFeedback = () => {
-  //   let total = 0;
-  //   for (let feedback of Object.values(this.state)) {
-  //     total += feedback;
-  //   }
-  //   return total;
-  // };
-
-  // countPositiveFeedbackPercentage = () => {
-  //   return ((this.state.good / this.countTotalFeedback()) * 100).toFixed(0);
-  // };
-
   render() {
     const countTotalFeedback = Object.values(this.state).reduce(function (
       sum,
@@ -41,13 +27,11 @@ class App extends Component {
       return sum + current;
     },
     0);
-    console.log(countTotalFeedback);
+    
     const countPositiveFeedbackPercentage = (
       (this.state.good / countTotalFeedback) *
       100
     ).toFixed(0);
-
-    console.log(countPositiveFeedbackPercentage);
 
     const startToRender =
       this.state.good !== 0 || this.state.neutral !== 0 || this.state.bad !== 0;
