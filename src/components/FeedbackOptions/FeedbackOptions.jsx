@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styled from './FeedbackOptions.module.css';
 
 export class FeedbackOptions extends Component {
   render() {
@@ -12,6 +13,7 @@ export class FeedbackOptions extends Component {
                 type="button"
                 onClick={this.props.onLeaveFeedBack}
                 key={index}
+                className={styled.button}
               >
                 {elem}
               </button>
