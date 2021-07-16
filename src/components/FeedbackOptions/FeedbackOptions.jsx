@@ -1,17 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from './FeedbackOptions.module.css';
 
-export class FeedbackOptions extends Component {
-  render() {
+export function FeedbackOptions ({options, onLeaveFeedBack}) {
     return (
       <>
-        {this.props.options &&
-          Array.isArray(this.props.options) &&
-          this.props.options.map((elem, index) => {
+        {options?.map((elem, index) => {
             return (
               <button
                 type="button"
-                onClick={this.props.onLeaveFeedBack}
+                onClick={onLeaveFeedBack}
                 key={index}
                 className={styled.button}
               >
@@ -22,4 +19,4 @@ export class FeedbackOptions extends Component {
       </>
     );
   }
-}
+

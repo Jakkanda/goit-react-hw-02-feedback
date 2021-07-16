@@ -19,20 +19,19 @@ class App extends Component {
     }));
   };
 
-  render() {
-    const countTotalFeedback = Object.values(this.state).reduce(function (
-      sum,
-      current,
-    ) {
+  countTotalFeedback = () => {
+    return Object.values(this.state).reduce(function (sum, current) {
       return sum + current;
-    },
-    0);
-    
-    const countPositiveFeedbackPercentage = (
-      (this.state.good / countTotalFeedback) *
-      100
-    ).toFixed(0);
+    }, 0);
+  };
+  countPositiveFeedbackPercentage = () => {
+    return ((this.state.good / this.countTotalFeedback()) * 100).toFixed(0);
+  };
 
+  render() {
+    const totalFeedback = this.countTotalFeedback();
+    const positiveFeedbackPersentage = this.countPositiveFeedbackPercentage();
+    
     const startToRender =
       this.state.good !== 0 || this.state.neutral !== 0 || this.state.bad !== 0;
     return (
@@ -50,8 +49,8 @@ class App extends Component {
               good={this.state.good}
               neutral={this.state.neutral}
               bad={this.state.bad}
-              countTotalFeedback={countTotalFeedback}
-              countPositiveFeedbackPercentage={countPositiveFeedbackPercentage}
+              countTotalFeedback={totalFeedback}
+              countPositiveFeedbackPercentage={positiveFeedbackPersentage}
             />
           ) : (
             <Notification message="No feedback given" />
